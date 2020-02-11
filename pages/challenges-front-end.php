@@ -6,15 +6,8 @@
 				<i id="formArrow" class="fas fa-arrow-left"></i>
 			</div>
 		</div>
-		<div class="formContentContainer" data-current="1">
-			<div class="formInnerContentContainer">
-				<div class="formContentSlideContainer">
-				
-				</div>
-				<div class="formContentSlideContainer">
-					
-				</div>
-			</div>
+		<div class="formContentContainer">
+			<div class="formInnerContentContainer"></div>
 		</div>
 	</div>
 </div>

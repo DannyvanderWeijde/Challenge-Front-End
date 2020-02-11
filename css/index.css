@@ -7,6 +7,15 @@
 	box-sizing: border-box;
 }
 
+h2{
+	font-size: 32px;
+	color: #01B4DC;
+}
+
+p{
+	font-size: 30px;
+}
+
 .websiteContainer,
 .formContainer,
 .formHeaderContainer,
@@ -84,6 +93,7 @@
 	height: 100%;
     white-space: nowrap;
     overflow: hidden;
+    overflow-x: auto;
     -webkit-transition: 0.3s ease-in;
     -moz-transition: 0.3s ease-in;
     -o-transition: 0.3s ease-in;
@@ -96,4 +106,5 @@
 	height: 100%;
 	margin: 0% 10%;
 	display: inline-block;
+	white-space: normal;
 }

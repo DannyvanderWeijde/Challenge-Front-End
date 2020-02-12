@@ -14,14 +14,23 @@ h2{
 
 p{
 	font-size: 30px;
+	margin: 40px 0px 0px 0px;
+}
+
+button{
+	border: none;
+	background-color: transparent;
+   	outline:none;
+   	cursor: pointer;
 }
 
 .websiteContainer,
+.introContainer,
 .formContainer,
 .formHeaderContainer,
 .formArrowContainer,
 .formContentContainer,
-.formInnerContentContainer{
+.formChoiceContainer,{
 	width: 100%;
 	height: auto;
 	overflow: auto;
@@ -36,6 +45,7 @@ p{
 	position: relative;
 }
 
+.introContainer,
 .formContainer{
 	width: 80%;
 	height: 90vh;
@@ -44,6 +54,27 @@ p{
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+}
+
+.introButton{
+	color: #fff;
+	background-color: #000;
+	padding: 20px 40px;
+	font-size: 26px;
+	border-radius: 5px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-webkit-transition: 0.3s ease-out;
+    -moz-transition: 0.3s ease-out;
+    -o-transition: 0.3s ease-out;
+    -ms-transition: 0.3s ease-out;
+    transition: 0.3s ease-out;
+}
+
+.introButton:hover{
+	background-color: #018aa9;
 }
 
 .formHeaderContainer{
@@ -79,6 +110,16 @@ p{
     top: 50%;
     transform: translate(0%, -50%);
     cursor: pointer;
+    margin: 0px 0px 0px 3px;
+    -webkit-transition: 0.3s ease-out;
+    -moz-transition: 0.3s ease-out;
+    -o-transition: 0.3s ease-out;
+    -ms-transition: 0.3s ease-out;
+    transition: 0.3s ease-out;
+}
+
+#formArrow:hover{
+	margin: 0px;
 }
 
 .formContentContainer{
@@ -93,18 +134,89 @@ p{
 	height: 100%;
     white-space: nowrap;
     overflow: hidden;
-    overflow-x: auto;
-    -webkit-transition: 0.3s ease-in;
+}
+
+.formContentSlideContainer{
+	width: 80%;
+	height: auto;
+	margin: 0% 10%;
+	display: inline-block;
+	white-space: normal;
+	padding: 1%;
+	-webkit-transition: 0.3s ease-in;
     -moz-transition: 0.3s ease-in;
     -o-transition: 0.3s ease-in;
     -ms-transition: 0.3s ease-in;
     transition: 0.3s ease-in;
 }
 
-.formContentSlideContainer{
-	width: 80%;
-	height: 100%;
-	margin: 0% 10%;
+.formChoiceContainer{
+	margin: 100px 0px 0px 0px;
+	position: relative;
+}
+
+.formChoice{
+	color: #fff;
+	background-color: #000;
+	padding: 20px 40px;
+	font-size: 26px;
+	border-radius: 5px;
+	-webkit-transition: 0.3s ease-out;
+    -moz-transition: 0.3s ease-out;
+    -o-transition: 0.3s ease-out;
+    -ms-transition: 0.3s ease-out;
+    transition: 0.3s ease-out;
+}
+
+.formChoice:hover{
+	background-color: #018aa9;
+}
+
+.formChoice:nth-child(2n){
+	margin: 0px 15px;
+}
+
+.formSkip{
+	position: absolute;
+    top: 50%;
+    right: 0%;
+    transform: translate(0%, -50%);
+}
+
+.formSkip span{
+	color: #b4b4b4;
+	font-size: 22px;
+}
+
+.formSkip span:first-child{
+	margin: 0px 40px 0px 0px;
+}
+    
+.formSkip span:nth-child(2n){
+	position: absolute;
+	right: 10px;
+	-webkit-transition: 0.3s ease-out;
+    -moz-transition: 0.3s ease-out;
+    -o-transition: 0.3s ease-out;
+    -ms-transition: 0.3s ease-out;
+    transition: 0.3s ease-out;
+}
+
+.formSkip:hover > span:nth-child(2n){
+	right: 5px;
+}
+
+.formCompanyOpinion{
+	margin: 100px 0px 0px 0px;
+	font-size: 24px;
+	cursor: pointer;
+}
+
+.formCompanyOpinion img,
+.formCompanyOpinion div{
 	display: inline-block;
-	white-space: normal;
+}
+
+.formCompanyOpinion img{
+	margin: 0px 20px 0px 0px;
 }

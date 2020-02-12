@@ -1,4 +1,9 @@
 <div class="websiteContainer">
+	<div class="introContainer">
+		<button class="introButton">
+			Start
+		</button>
+	</div>
 	<div class="formContainer">
 		<div class="formHeaderContainer">
 			<div class="formColorBar"></div>

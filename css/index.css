@@ -24,13 +24,23 @@ button{
    	cursor: pointer;
 }
 
+strong{
+	color: #01B4DC;
+}
+
 .websiteContainer,
 .introContainer,
 .formContainer,
 .formHeaderContainer,
 .formArrowContainer,
 .formContentContainer,
-.formChoiceContainer,{
+.formChoiceContainer,
+.endScreenContainer,
+.endScreenQuestions,
+.endScreenQuestionsWeights,
+.endScreenPartiesContainer,
+.endScreenParties,
+.PartiesHeader{
 	width: 100%;
 	height: auto;
 	overflow: auto;
@@ -46,7 +56,8 @@ button{
 }
 
 .introContainer,
-.formContainer{
+.formContainer,
+.endScreenContainer{
 	width: 80%;
 	height: 90vh;
 	background-color: #fff;
@@ -56,16 +67,13 @@ button{
 	transform: translate(-50%, -50%);
 }
 
-.introButton{
+.introButton,
+.formButton{
 	color: #fff;
 	background-color: #000;
 	padding: 20px 40px;
 	font-size: 26px;
 	border-radius: 5px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 	-webkit-transition: 0.3s ease-out;
     -moz-transition: 0.3s ease-out;
     -o-transition: 0.3s ease-out;
@@ -73,7 +81,15 @@ button{
     transition: 0.3s ease-out;
 }
 
-.introButton:hover{
+.introButton{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.introButton:hover,
+.formButton:hover{
 	background-color: #018aa9;
 }
 
@@ -81,7 +97,8 @@ button{
 	height: 80px;
 }
 
-.formColorBar{
+.formColorBar,
+.endScreenColorBar{
 	width: 3.33%;
 	height: 10px;
 	background-color: #01B4DC;
@@ -98,7 +115,9 @@ button{
 	position: relative;
 }
 
-#formArrow{
+#formArrow,
+#endScreenArrow,
+#endScreenPartiesArrow{
 	font-size: 20px;
     width: 50px;
     height: 50px;
@@ -118,7 +137,9 @@ button{
     transition: 0.3s ease-out;
 }
 
-#formArrow:hover{
+#formArrow:hover,
+#endScreenArrow:hover,
+#endScreenPartiesArrow:hover{
 	margin: 0px;
 }
 
@@ -136,7 +157,11 @@ button{
     overflow: hidden;
 }
 
-.formContentSlideContainer{
+.formContentSlideContainer,
+.endScreenQuestionsWeights,
+.endScreenPartiesContainer,
+.endScreenQuestionsHeader,
+.endScreenPartiesHeader{
 	width: 80%;
 	height: auto;
 	margin: 0% 10%;
@@ -219,4 +244,90 @@ button{
 
 .formCompanyOpinion img{
 	margin: 0px 20px 0px 0px;
+}
+
+.endScreenContainer{
+	height: auto;
+	top: 0;
+	transform: translate(-50%, 0%);
+	margin: 5vh 0vw;
+}
+
+.endScreenContainer .endScreenQuestionsHeader,
+.endScreenContainer .endScreenPartiesHeader,
+.endScreenContainer .endScreenPartiesContainer,
+.endScreenContainer .endScreenQuestionsWeights{
+	display: block;
+}
+
+.endScreenContainer .formContentContainer{
+	height: auto;
+}
+
+.endScreenColorBar{
+	width: 100%;
+}
+
+.formButton{
+	margin: 50px 0px 0px 0px;
+}
+
+.endScreenQuestionsHeader p,
+.endScreenPartiesHeader p{
+	font-size: 18px;
+}
+
+.endScreenQuestionsWeights,
+.endScreenPartiesContainer{
+	width: 100%;
+	margin: 100px 0px 0px 0px;
+	padding: 40px 11%;
+	background-color: #E7EAEB;
+}
+
+.endScreenQuestionsWeights h3,
+.endScreenPartiesContainer h3{
+	margin: 0px 0px 20px 0px;
+}
+
+.questionWeightContainer,
+.partiesContainer{
+	width: 30%;
+	height: 20px;
+	margin: 10px 0px;
+	display: inline-block;
+}
+
+.questionWeightContainer:nth-child(3n+3),
+.partiesContainer:nth-child(3n+3){
+	margin: 10px 4.5%;
+}
+
+.questionWeightContainer input,
+.partiesContainer input{
+	margin: 0px 10px 20px 0px;
+}
+
+.endScreenPartiesContainer button{
+	background-color: #fff;
+	padding: 10px 15px;
+	border-radius: 5px;
+	-webkit-transition: 0.3s ease-out;
+    -moz-transition: 0.3s ease-out;
+    -o-transition: 0.3s ease-out;
+    -ms-transition: 0.3s ease-out;
+    transition: 0.3s ease-out;
+}
+
+.endScreenPartiesContainer button:hover{
+	color: #fff;
+	background-color: #000;
+}
+
+.endScreenPartiesContainer button:nth-child(3){
+	margin: 0px 5px;
+}
+
+.PartiesHeader{
+	margin: 0px 0px 40px 0px;
 }

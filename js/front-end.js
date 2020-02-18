@@ -33,6 +33,12 @@ var score = [];
 var totalScore = "";
 var partiesAndScores = [];
 
+for(m = 0; subjects[0]["parties"].length > m; m++){
+    score[m] = []; 
+    partiesAndScores[m] = []; 
+}
+console.log(subjects);
+
 for(d = 0; subjects.length > d; d++){
 	subjectsTitles[d] = subjects[d]["title"];
 	subjectsTitlesInQuotes[d] = "\"" + subjectsTitles[d] + "\""; 
@@ -147,6 +153,18 @@ endButton.setAttribute("onclick", "back("+subjectsTitlesInQuotes[subjectsTitlesI
 formButton.setAttribute("onclick", "questionWeight();");
 endScreenPartiesArrow.setAttribute("onclick", "back("+questionsImportance+");");
 endScreenResultArrow.setAttribute("onclick", "page("+"http://localhost/leerjaar%202%20(www)/block%207/challenges/front-end/Challenge-Front-End/index/body.php#parties"+");");
+
+var getPartiesInputs = [];
+var inputValues = [];
+for(g = 0; document.getElementsByClassName("partiesInput").length > g; g++){
+	getPartiesInputs[g] = document.getElementsByClassName("partiesInput")[g];
+}
+
+var getQuestionInputs = [];
+var inputValues = [];
+for(g = 0; document.getElementsByClassName("questionWeightInput").length > g; g++){
+	getQuestionInputs[g] = document.getElementsByClassName("questionWeightInput")[g];
+}
 
 function page(url = subjectsTitles[subjectsTitles.length-1]){
 	if(url == "http://localhost/leerjaar%202%20(www)/block%207/challenges/front-end/Challenge-Front-End/index/body.php" || url == "http://localhost/leerjaar%202%20(www)/block%207/challenges/front-end/Challenge-Front-End/index/body.php#intro"){
@@ -284,11 +302,6 @@ function back(url,buttonCommand = true){
 }
 
 function questionWeight(){
-	var getQuestionInputs = [];
-	var inputValues = [];
-	for(g = 0; document.getElementsByClassName("questionWeightInput").length > g; g++){
-		getQuestionInputs[g] = document.getElementsByClassName("questionWeightInput")[g];
-	}
 	for(e = 0; subjectsTitles.length > e; e++){
 		inputValues[e] = getQuestionInputs[e].checked;
 	}
@@ -301,11 +314,6 @@ function parties(url){
 }
 
 function select(type){
-	var getPartiesInputs = [];
-	var inputValues = [];
-	for(g = 0; document.getElementsByClassName("partiesInput").length > g; g++){
-		getPartiesInputs[g] = document.getElementsByClassName("partiesInput")[g];
-	}
 	if(type == "all"){
 		for(e = 0; subjectsTitles.length > e; e++){
 			if(getPartiesInputs[e]){
@@ -341,51 +349,52 @@ function result(url){
 	for(i = 0; subjects.length > i; i++){
 		if(getPartiesInputs[i].checked == true){
 			partiesAndScores[i] = getPartiesInputs[i][0];
-			for(h = 0; subjects.length > h; h++){
-				if(subjects[h]["awnser"] == "pro"){
-					if(awnsers[h] == "eens"){
-						if(getQuestionInputs[h]){
+			for(h = 0; subjects[i]["parties"].length > h; h++){
+				score[i][h] = 0;
+				if(subjects[i]["parties"][h]["position"] == "pro"){
+					if(userAwnsers[h] == "eens"){
+						if(getQuestionInputs[h].checked == true){
 							score[i][h] = 2;
 						}else{
 							score[i][h] = 1;
 						}
 					}else{
-						if(getQuestionInputs[h]){
+						if(getQuestionInputs[h].checked == true){
 							score[i][h] = -1;
 						}else{
 							score[i][h] = 0;
 						}
 					}
-				}else if(subjects[h]["awnser"] == "geen mening"){
-					if(awnsers[h] == "geen van beide"){
-						if(getQuestionInputs[h]){
+				}else if(subjects[i]["parties"][h]["position"] == "none"){
+					if(userAwnsers[h] == "geen van beide"){
+						if(getQuestionInputs[h].checked == true){
 							score[i][h] = 2;
 						}else{
 							score[i][h] = 1;
 						}
 					}else{
-						if(getQuestionInputs[h]){
+						if(getQuestionInputs[h].checked == true){
 							score[i][h] = -1;
 						}else{
 							score[i][h] = 0;
 						}
 					}
-				}else if(subjects[h]["awnser"] == "constra"){
-					if(awnsers[h] == "oneens"){
-						if(getQuestionInputs[h]){
+				}else if(subjects[i]["parties"][h]["position"] == "constra"){
+					if(userAwnsers[h] == "oneens"){
+						if(getQuestionInputs[h].checked == true){
 							score[i][h] = 2;
 						}else{
 							score[i][h] = 1;
 						}
 					}else{
-						if(getQuestionInputs[h]){
+						if(getQuestionInputs[h].checked == true){
 							score[i][h] = -1;
 						}else{
 							score[i][h] = 0;
 						}
 					}
 				}else{
-					if(getQuestionInputs[h]){
+					if(getQuestionInputs[h].checked == true){
 						score[i][h] = -1;
 					}else{
 						score[i][h] = 0;
@@ -393,15 +402,15 @@ function result(url){
 				}
 				totalScore[i] = totalScore[i] + score[i][h];
 			}
-			partiesAndScores[i][2] = totalScore[i];
+			partiesAndScores[i][0] = totalScore[i];
 		}
 	}
 	totalScore.sort(sortNumber);
 	for(k = 0; totalScore.length > k; k++){
 		for(l = 0; totalScore.length > l; l++){
-			if(totalScore[k] == partiesAndScores[l][2]){
+			if(totalScore[k] == partiesAndScores[l][1]){
 				var endScoreContainer = document.getElementsByClassName("endScoreContainer")[k];
-				endScoreContainer.innerHTML = partiesAndScores[l][1] + partiesAndScores[l][2];
+				endScoreContainer.innerHTML = partiesAndScores[l][0] + partiesAndScores[l][1];
 			}
 		}
 	}

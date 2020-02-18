@@ -40,7 +40,8 @@ strong{
 .endScreenQuestionsWeights,
 .endScreenPartiesContainer,
 .endScreenParties,
-.PartiesHeader{
+.PartiesHeader,
+.endScreenResult{
 	width: 100%;
 	height: auto;
 	overflow: auto;
@@ -117,7 +118,8 @@ strong{
 
 #formArrow,
 #endScreenArrow,
-#endScreenPartiesArrow{
+#endScreenPartiesArrow,
+#endScreenResultArrow{
 	font-size: 20px;
     width: 50px;
     height: 50px;
@@ -139,7 +141,8 @@ strong{
 
 #formArrow:hover,
 #endScreenArrow:hover,
-#endScreenPartiesArrow:hover{
+#endScreenPartiesArrow:hover,
+#endScreenResultArrow:hover{
 	margin: 0px;
 }
 
@@ -161,7 +164,9 @@ strong{
 .endScreenQuestionsWeights,
 .endScreenPartiesContainer,
 .endScreenQuestionsHeader,
-.endScreenPartiesHeader{
+.endScreenPartiesHeader,
+.endScreenResultHeader,
+.endScreenResultsContainer{
 	width: 80%;
 	height: auto;
 	margin: 0% 10%;
@@ -255,7 +260,9 @@ strong{
 
 .endScreenContainer .endScreenQuestionsHeader,
 .endScreenContainer .endScreenPartiesHeader,
+.endScreenContainer .endScreenResultHeader,
 .endScreenContainer .endScreenPartiesContainer,
+.endScreenContainer .endScreenResultsContainer,
 .endScreenContainer .endScreenQuestionsWeights{
 	display: block;
 }
@@ -273,12 +280,14 @@ strong{
 }
 
 .endScreenQuestionsHeader p,
-.endScreenPartiesHeader p{
+.endScreenPartiesHeader p,
+.endScreenResultHeader p{
 	font-size: 18px;
 }
 
 .endScreenQuestionsWeights,
-.endScreenPartiesContainer{
+.endScreenPartiesContainer,
+.endScreenResultsContainer{
 	width: 100%;
 	margin: 100px 0px 0px 0px;
 	padding: 40px 11%;
@@ -286,7 +295,8 @@ strong{
 }
 
 .endScreenQuestionsWeights h3,
-.endScreenPartiesContainer h3{
+.endScreenPartiesContainer h3,
+.endScreenResultsContainer h3{
 	margin: 0px 0px 20px 0px;
 }
 

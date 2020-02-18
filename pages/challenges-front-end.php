@@ -56,7 +56,7 @@
 							<p>
 								U kunt kiezen voor <strong>zittende partijen</strong>, die nu in de Tweede Kamer vertegenwoordigd zijn. Daarbij nemen we ook de partijen mee die in de peilingen op minimaal één zetel staan. U kunt <strong>alle partijen</strong> meenemen en u kunt een <strong>eigen selectie</strong> maken van tenminste drie partijen.
 							</p>
-							<button class="formButton">
+							<button class="formButton" onclick="result('http://localhost/leerjaar%202%20(www)/block%207/challenges/front-end/Challenge-Front-End/index/body.php#result');">
 								Naar resultaat
 							</button>
 						</div>
@@ -76,6 +76,21 @@
 								</button>
 							</div>
 						</div>
+					</div>
+				</div>
+			</div>
+			<div class="endScreenResult">
+				<div class="endScreenColorBar"></div>
+				<div class="formArrowContainer">
+					<i id="endScreenResultArrow" class="fas fa-arrow-left"></i>
+				</div>
+				<div class="formContentContainer">
+					<div class="endScreenResultHeader">
+						<h2>
+							Dit zijn uw resultaten van onze stemwijzer.
+						</h2>
+					</div>
+					<div class="endScreenResultsContainer">
 					</div>
 				</div>
 			</div>

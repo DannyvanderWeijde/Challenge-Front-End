@@ -22,10 +22,16 @@ var endScreenPartiesContainer = document.getElementsByClassName("endScreenPartie
 var formButton = document.getElementsByClassName("formButton")[0];
 var endScreenQuestions = document.getElementsByClassName("endScreenQuestions")[0];
 var endScreenParties = document.getElementsByClassName("endScreenParties")[0];
+var endScreenResult = document.getElementsByClassName("endScreenResult")[0];
+var endScreenResultsContainer = document.getElementsByClassName("endScreenResultsContainer")[0];
 var endScreenPartiesArrow = document.getElementById("endScreenPartiesArrow");
+var endScreenResultArrow = document.getElementById("endScreenResultArrow");
 var questionsImportance = "\"" + "http://localhost/leerjaar%202%20(www)/block%207/challenges/front-end/Challenge-Front-End/index/body.php#questionsImportance" + "\"";
 var seats = ["VVD","PvdA","PVV","SP","CDA","D66","ChristenUnie","GroenLinks","SGP","Partij voor de Dieren","50Plus","VNL","DENK","Forum voor Democratie"];
 var seated = [];
+var score = [];
+var totalScore = "";
+var partiesAndScores = [];
 
 for(d = 0; subjects.length > d; d++){
 	subjectsTitles[d] = subjects[d]["title"];
@@ -110,6 +116,11 @@ for(a = 0; subjects.length > a; a++){
 	newQuestionWeightContainer.appendChild(newQuestionWeightLine);
 
 	endScreenQuestionsWeights.appendChild(newQuestionWeightContainer);
+
+	var newScoreContainer = document.createElement("div");
+	newScoreContainer.className = "endScoreContainer";
+
+	endScreenResultsContainer.appendChild(newScoreContainer);
 }
 
 for(f = 0; subjects[0]["parties"].length > f; f++){
@@ -135,6 +146,7 @@ introButton.setAttribute("onclick", "page("+subjectsTitlesInQuotes[0]+");");
 endButton.setAttribute("onclick", "back("+subjectsTitlesInQuotes[subjectsTitlesInQuotes.length-1]+");");
 formButton.setAttribute("onclick", "questionWeight();");
 endScreenPartiesArrow.setAttribute("onclick", "back("+questionsImportance+");");
+endScreenResultArrow.setAttribute("onclick", "page("+"http://localhost/leerjaar%202%20(www)/block%207/challenges/front-end/Challenge-Front-End/index/body.php#parties"+");");
 
 function page(url = subjectsTitles[subjectsTitles.length-1]){
 	if(url == "http://localhost/leerjaar%202%20(www)/block%207/challenges/front-end/Challenge-Front-End/index/body.php" || url == "http://localhost/leerjaar%202%20(www)/block%207/challenges/front-end/Challenge-Front-End/index/body.php#intro"){
@@ -143,12 +155,14 @@ function page(url = subjectsTitles[subjectsTitles.length-1]){
 		introContainer.style.display = "block";
 		endScreenParties.style.display = "none";
 		endScreenQuestions.style.display = "none";
+		endScreenResult.style.display = "none";
 	}else if(url == "http://localhost/leerjaar%202%20(www)/block%207/challenges/front-end/Challenge-Front-End/index/body.php#questionsImportance"){
 		formContainer.style.display = "none";
 		endScreen.style.display = "block";
 		introContainer.style.display = "none";
 		endScreenParties.style.display = "none";
 		endScreenQuestions.style.display = "block";
+		endScreenResult.style.display = "none";
 		location.href = originalLink + "#questionsImportance";
 	}else if(url == "http://localhost/leerjaar%202%20(www)/block%207/challenges/front-end/Challenge-Front-End/index/body.php#parties"){
 		formContainer.style.display = "none";
@@ -156,6 +170,15 @@ function page(url = subjectsTitles[subjectsTitles.length-1]){
 		introContainer.style.display = "none";
 		endScreenParties.style.display = "block";
 		endScreenQuestions.style.display = "none";
+		endScreenResult.style.display = "none";
+	}else if(url == "http://localhost/leerjaar%202%20(www)/block%207/challenges/front-end/Challenge-Front-End/index/body.php#result"){
+		formContainer.style.display = "none";
+		endScreen.style.display = "block";
+		introContainer.style.display = "none";
+		endScreenParties.style.display = "none";
+		endScreenQuestions.style.display = "none";
+		endScreenResult.style.display = "block";
+		location.href = originalLink + "#result";
 	}else{
 		url = url.replace('http://localhost/leerjaar%202%20(www)/block%207/challenges/front-end/Challenge-Front-End/index/body.php#','');
 		url = url.replace("%20"," ");
@@ -261,13 +284,13 @@ function back(url,buttonCommand = true){
 }
 
 function questionWeight(){
-	var getInputs = [];
+	var getQuestionInputs = [];
 	var inputValues = [];
 	for(g = 0; document.getElementsByClassName("questionWeightInput").length > g; g++){
-		getInputs[g] = document.getElementsByClassName("questionWeightInput")[g];
+		getQuestionInputs[g] = document.getElementsByClassName("questionWeightInput")[g];
 	}
 	for(e = 0; subjectsTitles.length > e; e++){
-		inputValues[e] = getInputs[e].checked;
+		inputValues[e] = getQuestionInputs[e].checked;
 	}
 	var newUrl = location.href = originalLink + "#parties";
 	parties(newUrl);
@@ -278,23 +301,23 @@ function parties(url){
 }
 
 function select(type){
-	var getInputs = [];
+	var getPartiesInputs = [];
 	var inputValues = [];
 	for(g = 0; document.getElementsByClassName("partiesInput").length > g; g++){
-		getInputs[g] = document.getElementsByClassName("partiesInput")[g];
+		getPartiesInputs[g] = document.getElementsByClassName("partiesInput")[g];
 	}
 	if(type == "all"){
 		for(e = 0; subjectsTitles.length > e; e++){
-			if(getInputs[e]){
-				getInputs[e].checked = true;
-				inputValues[e] = getInputs[e].checked;
+			if(getPartiesInputs[e]){
+				getPartiesInputs[e].checked = true;
+				inputValues[e] = getPartiesInputs[e].checked;
 			}
 		}
 	}else if(type == "none"){
 		for(e = 0; subjectsTitles.length > e; e++){
-			if(getInputs[e]){
-				getInputs[e].checked = false;
-				inputValues[e] = getInputs[e].checked;
+			if(getPartiesInputs[e]){
+				getPartiesInputs[e].checked = false;
+				inputValues[e] = getPartiesInputs[e].checked;
 			}
 		}
 	}else if(type == "allSeats"){
@@ -302,15 +325,90 @@ function select(type){
 			for(h = 0; subjects[0]["parties"].length > h; h++){
 				seated[h] = seats.includes(subjects[0]["parties"][h]["name"]);
 			}
-			if(getInputs[e] && seated[e] == true){
-				getInputs[e].checked = true;
-				inputValues[e] = getInputs[e].checked;
-			}else{
-				getInputs[e].checked = false;
-				inputValues[e] = getInputs[e].checked;
+			if(getPartiesInputs[e] && seated[e] == true){
+				getPartiesInputs[e].checked = true;
+				inputValues[e] = getPartiesInputs[e].checked;
+			}else if(getPartiesInputs[e] && seated[e] == false){
+				getPartiesInputs[e].checked = false;
+				inputValues[e] = getPartiesInputs[e].checked;
 			}
 		}
 	}
+}
+
+function result(url){
+	page(url);
+	for(i = 0; subjects.length > i; i++){
+		if(getPartiesInputs[i].checked == true){
+			partiesAndScores[i] = getPartiesInputs[i][0];
+			for(h = 0; subjects.length > h; h++){
+				if(subjects[h]["awnser"] == "pro"){
+					if(awnsers[h] == "eens"){
+						if(getQuestionInputs[h]){
+							score[i][h] = 2;
+						}else{
+							score[i][h] = 1;
+						}
+					}else{
+						if(getQuestionInputs[h]){
+							score[i][h] = -1;
+						}else{
+							score[i][h] = 0;
+						}
+					}
+				}else if(subjects[h]["awnser"] == "geen mening"){
+					if(awnsers[h] == "geen van beide"){
+						if(getQuestionInputs[h]){
+							score[i][h] = 2;
+						}else{
+							score[i][h] = 1;
+						}
+					}else{
+						if(getQuestionInputs[h]){
+							score[i][h] = -1;
+						}else{
+							score[i][h] = 0;
+						}
+					}
+				}else if(subjects[h]["awnser"] == "constra"){
+					if(awnsers[h] == "oneens"){
+						if(getQuestionInputs[h]){
+							score[i][h] = 2;
+						}else{
+							score[i][h] = 1;
+						}
+					}else{
+						if(getQuestionInputs[h]){
+							score[i][h] = -1;
+						}else{
+							score[i][h] = 0;
+						}
+					}
+				}else{
+					if(getQuestionInputs[h]){
+						score[i][h] = -1;
+					}else{
+						score[i][h] = 0;
+					}
+				}
+				totalScore[i] = totalScore[i] + score[i][h];
+			}
+			partiesAndScores[i][2] = totalScore[i];
+		}
+	}
+	totalScore.sort(sortNumber);
+	for(k = 0; totalScore.length > k; k++){
+		for(l = 0; totalScore.length > l; l++){
+			if(totalScore[k] == partiesAndScores[l][2]){
+				var endScoreContainer = document.getElementsByClassName("endScoreContainer")[k];
+				endScoreContainer.innerHTML = partiesAndScores[l][1] + partiesAndScores[l][2];
+			}
+		}
+	}
+}
+
+function sortNumber(a, b){
+	return a - b;
 }
 
 page(url);

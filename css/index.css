@@ -48,6 +48,14 @@ strong{
 	overflow: auto;
 }
 
+.formContainer,
+.endScreen,
+.endScreenParties,
+.endScreenQuestions,
+.endScreenResult{
+	display: none;
+}
+
 .websiteContainer{
 	height: 100vh;
 	background-image: url(../images/challenges-front-end-background-image.jpg);

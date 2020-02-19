@@ -27,16 +27,11 @@ var endScreenResultsContainer = document.getElementsByClassName("endScreenResult
 var endScreenPartiesArrow = document.getElementById("endScreenPartiesArrow");
 var endScreenResultArrow = document.getElementById("endScreenResultArrow");
 var questionsImportance = "\"" + "http://localhost/leerjaar%202%20(www)/block%207/challenges/front-end/Challenge-Front-End/index/body.php#questionsImportance" + "\"";
+var partiesLink = "\"" + "http://localhost/leerjaar%202%20(www)/block%207/challenges/front-end/Challenge-Front-End/index/body.php#parties" + "\"";
 var seats = ["VVD","PvdA","PVV","SP","CDA","D66","ChristenUnie","GroenLinks","SGP","Partij voor de Dieren","50Plus","VNL","DENK","Forum voor Democratie"];
 var seated = [];
 var score = [];
-var totalScore = "";
-var partiesAndScores = [];
 
-for(m = 0; subjects[0]["parties"].length > m; m++){
-    score[m] = []; 
-    partiesAndScores[m] = []; 
-}
 console.log(subjects);
 
 for(d = 0; subjects.length > d; d++){
@@ -152,7 +147,7 @@ introButton.setAttribute("onclick", "page("+subjectsTitlesInQuotes[0]+");");
 endButton.setAttribute("onclick", "back("+subjectsTitlesInQuotes[subjectsTitlesInQuotes.length-1]+");");
 formButton.setAttribute("onclick", "questionWeight();");
 endScreenPartiesArrow.setAttribute("onclick", "back("+questionsImportance+");");
-endScreenResultArrow.setAttribute("onclick", "page("+"http://localhost/leerjaar%202%20(www)/block%207/challenges/front-end/Challenge-Front-End/index/body.php#parties"+");");
+endScreenResultArrow.setAttribute("onclick", "parties("+partiesLink+");");
 
 var getPartiesInputs = [];
 var inputValues = [];
@@ -189,6 +184,7 @@ function page(url = subjectsTitles[subjectsTitles.length-1]){
 		endScreenParties.style.display = "block";
 		endScreenQuestions.style.display = "none";
 		endScreenResult.style.display = "none";
+		location.href = originalLink + "#parties";
 	}else if(url == "http://localhost/leerjaar%202%20(www)/block%207/challenges/front-end/Challenge-Front-End/index/body.php#result"){
 		formContainer.style.display = "none";
 		endScreen.style.display = "block";
@@ -346,17 +342,60 @@ function select(type){
 
 function result(url){
 	page(url);
-	for(i = 0; subjects.length > i; i++){
-		if(getPartiesInputs[i].checked == true){
-			partiesAndScores[i] = getPartiesInputs[i][0];
-			for(h = 0; subjects[i]["parties"].length > h; h++){
-				score[i][h] = 0;
-				if(subjects[i]["parties"][h]["position"] == "pro"){
-					if(userAwnsers[h] == "eens"){
-						if(getQuestionInputs[h].checked == true){
-							score[i][h] = 2;
+	var totalScore = [];
+	var partiesAndScores = [];
+
+	for(m = 0; subjects[0]["parties"].length > m; m++){
+	    score[m] = [];
+	    partiesAndScores[m] = [];
+	    partiesAndScores[m].push(subjects[0]["parties"][m]["name"]); 
+	}
+	for(i = 0; subjects[i]["parties"].length > i; i++){
+		totalScore[i] = 0;
+		for(h = 0; subjects.length > h; h++){
+			for(n = 0; subjects[i]["parties"].length > n; n++){
+				if(subjects[h]["parties"][n]["name"] == partiesAndScores[i][0]){
+					if(subjects[h]["parties"][n]["position"] == "pro"){
+						if(userAwnsers[h] == "eens"){
+							if(getQuestionInputs[h].checked == true){
+								score[i][h] = 2;
+							}else{
+								score[i][h] = 1;
+							}
 						}else{
-							score[i][h] = 1;
+							if(getQuestionInputs[h].checked == true){
+								score[i][h] = -1;
+							}else{
+								score[i][h] = 0;
+							}
+						}
+					}else if(subjects[h]["parties"][n]["position"] == "none"){
+						if(userAwnsers[h] == "geen van beide"){
+							if(getQuestionInputs[h].checked == true){
+								score[i][h] = 2;
+							}else{
+								score[i][h] = 1;
+							}
+						}else{
+							if(getQuestionInputs[h].checked == true){
+								score[i][h] = -1;
+							}else{
+								score[i][h] = 0;
+							}
+						}
+					}else if(subjects[h]["parties"][n]["position"] == "constra"){
+						if(userAwnsers[h] == "oneens"){
+							if(getQuestionInputs[h].checked == true){
+								score[i][h] = 2;
+							}else{
+								score[i][h] = 1;
+							}
+						}else{
+							if(getQuestionInputs[h].checked == true){
+								score[i][h] = -1;
+							}else{
+								score[i][h] = 0;
+							}
 						}
 					}else{
 						if(getQuestionInputs[h].checked == true){
@@ -365,59 +404,35 @@ function result(url){
 							score[i][h] = 0;
 						}
 					}
-				}else if(subjects[i]["parties"][h]["position"] == "none"){
-					if(userAwnsers[h] == "geen van beide"){
-						if(getQuestionInputs[h].checked == true){
-							score[i][h] = 2;
-						}else{
-							score[i][h] = 1;
-						}
-					}else{
-						if(getQuestionInputs[h].checked == true){
-							score[i][h] = -1;
-						}else{
-							score[i][h] = 0;
-						}
-					}
-				}else if(subjects[i]["parties"][h]["position"] == "constra"){
-					if(userAwnsers[h] == "oneens"){
-						if(getQuestionInputs[h].checked == true){
-							score[i][h] = 2;
-						}else{
-							score[i][h] = 1;
-						}
-					}else{
-						if(getQuestionInputs[h].checked == true){
-							score[i][h] = -1;
-						}else{
-							score[i][h] = 0;
-						}
-					}
-				}else{
-					if(getQuestionInputs[h].checked == true){
-						score[i][h] = -1;
-					}else{
-						score[i][h] = 0;
-					}
+					totalScore[i] = totalScore[i] + score[i][h];
 				}
-				totalScore[i] = totalScore[i] + score[i][h];
 			}
-			partiesAndScores[i][0] = totalScore[i];
 		}
+		partiesAndScores[i].push(totalScore[i]);
 	}
 	totalScore.sort(sortNumber);
+	var usedParties = [];
 	for(k = 0; totalScore.length > k; k++){
+		q = 0;
 		for(l = 0; totalScore.length > l; l++){
 			if(totalScore[k] == partiesAndScores[l][1]){
-				var endScoreContainer = document.getElementsByClassName("endScoreContainer")[k];
-				endScoreContainer.innerHTML = partiesAndScores[l][0] + partiesAndScores[l][1];
+				if(q == 0){
+					if(usedParties.includes(partiesAndScores[l][0])){
+					
+					}else{
+						var endScoreContainer = document.getElementsByClassName("endScoreContainer")[k];
+						endScoreContainer.innerHTML = partiesAndScores[l][0] + partiesAndScores[l][1];
+						usedParties.push(partiesAndScores[l][0]);
+						q++;
+					}
+				}
 			}
 		}
 	}
 }
 
 function sortNumber(a, b){
-	return a - b;
+	return b - a;
 }
 
 page(url);

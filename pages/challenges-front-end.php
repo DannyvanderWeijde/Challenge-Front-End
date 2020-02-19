@@ -56,7 +56,7 @@
 							<p>
 								U kunt kiezen voor <strong>zittende partijen</strong>, die nu in de Tweede Kamer vertegenwoordigd zijn. Daarbij nemen we ook de partijen mee die in de peilingen op minimaal één zetel staan. U kunt <strong>alle partijen</strong> meenemen en u kunt een <strong>eigen selectie</strong> maken van tenminste drie partijen.
 							</p>
-							<button class="formButton" onclick="result('result');">
+							<button class="formButton" onclick="result('http://localhost/leerjaar%202%20(www)/block%207/challenges/front-end/Challenge-Front-End/index/body.php#result');">
 								Naar resultaat
 							</button>
 						</div>

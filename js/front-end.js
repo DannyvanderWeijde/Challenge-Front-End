@@ -32,8 +32,6 @@ var seats = ["VVD","PvdA","PVV","SP","CDA","D66","ChristenUnie","GroenLinks","SG
 var seated = [];
 var score = [];
 
-console.log(subjects);
-
 for(d = 0; subjects.length > d; d++){
 	subjectsTitles[d] = subjects[d]["title"];
 	subjectsTitlesInQuotes[d] = "\"" + subjectsTitles[d] + "\""; 
@@ -117,11 +115,6 @@ for(a = 0; subjects.length > a; a++){
 	newQuestionWeightContainer.appendChild(newQuestionWeightLine);
 
 	endScreenQuestionsWeights.appendChild(newQuestionWeightContainer);
-
-	var newScoreContainer = document.createElement("div");
-	newScoreContainer.className = "endScoreContainer";
-
-	endScreenResultsContainer.appendChild(newScoreContainer);
 }
 
 for(f = 0; subjects[0]["parties"].length > f; f++){
@@ -141,6 +134,26 @@ for(f = 0; subjects[0]["parties"].length > f; f++){
 	newPartiesContainer.appendChild(newPartiesLine);
 
 	endScreenPartiesContainer.appendChild(newPartiesContainer);
+
+	var newScoreContainer = document.createElement("div");
+	newScoreContainer.className = "endScoreContainer";
+
+	var endScoreNames = document.createElement("div");
+	endScoreNames.className = "endScoreNames";
+	newScoreContainer.appendChild(endScoreNames);
+
+	var endScoreGraphBar = document.createElement("div");
+	endScoreGraphBar.className = "endScoreGraphBar";
+
+	var newPercentage = document.createElement("span");
+	endScoreGraphBar.appendChild(newPercentage);
+
+	var endScoreInnerGraphBar = document.createElement("div");
+	endScoreInnerGraphBar.className = "endScoreInnerGraphBar";
+	endScoreGraphBar.appendChild(endScoreInnerGraphBar);
+
+	newScoreContainer.appendChild(endScoreGraphBar);
+	endScreenResultsContainer.appendChild(newScoreContainer);
 }
 
 introButton.setAttribute("onclick", "page("+subjectsTitlesInQuotes[0]+");");
@@ -340,11 +353,35 @@ function select(type){
 	}
 }
 
+function preResult(url){
+	var amountOfPartiesSelected = 0;
+	for(k = 0; getPartiesInputs.length > k; k++){
+		var endScoreContainer = document.getElementsByClassName("endScoreContainer")[k];
+		if(getPartiesInputs[k].checked == true){
+			amountOfPartiesSelected++;
+			endScoreContainer.style.display = "block";
+		}else{
+			endScoreContainer.style.display = "none";
+		}
+	}
+	if(amountOfPartiesSelected < 3){
+		alert("u moet minimaal 3 partijen kiezen");
+	}else{
+		result(url);
+	}
+}
+
 function result(url){
 	page(url);
 	var totalScore = [];
 	var partiesAndScores = [];
-
+	var totalAmountOfPoints = 0;
+	totalAmountOfPoints = totalAmountOfPoints + subjects.length;
+	for(e = 0; subjectsTitles.length > e; e++){
+		if(getQuestionInputs[e].checked == true){
+			totalAmountOfPoints++;
+		}
+	}
 	for(m = 0; subjects[0]["parties"].length > m; m++){
 	    score[m] = [];
 	    partiesAndScores[m] = [];
@@ -420,10 +457,22 @@ function result(url){
 					if(usedParties.includes(partiesAndScores[l][0])){
 					
 					}else{
-						var endScoreContainer = document.getElementsByClassName("endScoreContainer")[k];
-						endScoreContainer.innerHTML = partiesAndScores[l][0] + partiesAndScores[l][1];
-						usedParties.push(partiesAndScores[l][0]);
-						q++;
+						if(getPartiesInputs[k].checked == true){
+							var endScoreNames = document.getElementsByClassName("endScoreContainer")[k].getElementsByClassName("endScoreNames")[0];
+							var endScoreInnerGraphBar = document.getElementsByClassName("endScoreContainer")[k].getElementsByClassName("endScoreInnerGraphBar")[0];
+							var endScoreGraphBar = document.getElementsByClassName("endScoreContainer")[k].getElementsByClassName("endScoreGraphBar")[0];
+							var span = endScoreGraphBar.getElementsByTagName("span")[0];
+							endScoreNames.innerHTML = partiesAndScores[l][0];
+							var percentage = partiesAndScores[l][1] / totalAmountOfPoints * 100;
+							percentage = Math.round(percentage);
+							if(percentage < 0){
+								percentage = 0;
+							}
+							endScoreInnerGraphBar.style.width = percentage + "%";
+							span.innerHTML = percentage + "%";
+							usedParties.push(partiesAndScores[l][0]);
+							q++;
+						}
 					}
 				}
 			}

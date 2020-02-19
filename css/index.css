@@ -41,7 +41,8 @@ strong{
 .endScreenPartiesContainer,
 .endScreenParties,
 .PartiesHeader,
-.endScreenResult{
+.endScreenResult,
+.endScoreContainer{
 	width: 100%;
 	height: auto;
 	overflow: auto;
@@ -340,4 +341,34 @@ strong{
 
 .PartiesHeader{
 	margin: 0px 0px 40px 0px;
+}
+
+.endScoreContainer{
+	margin: 20px 0px;
+}
+
+.endScoreNames{
+	margin: 0px 0px 5px 0px;
+}
+
+.endScoreGraphBar{
+	height: 30px;
+	width: 100%;
+	background-color: transparent;
+	border: 1px solid #000;
+	border-radius: 3px;
+	position: relative;
+}
+
+.endScoreGraphBar span{
+	position: absolute;
+	top: 50%;
+	left: 5px;
+	transform: translate(0%, -50%);
+}
+
+.endScoreInnerGraphBar{
+	width: 0%;
+	height: 28px;
+	background-color: #01B4DC;
 }

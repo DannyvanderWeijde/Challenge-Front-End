@@ -1,3 +1,11 @@
+// Ziet er netjes uit! 
+// Probeer comments te plaatsen bij functions.
+// Probeer bijv. bij de for loops; de variabelen zoals a of i, een naam te geven. Dit maakt je code duidelijker te lezen.
+// Probeer te kijken of je bepaalde functions, zoals je result function, single responsibility kunt maken. D.w.z. dat de functie 1 taak heeft.
+// Ziet er voor de rest erg netjes uit! Ben onder de indruk hoe je problemen in de opdracht hebt opgelost, en je kennis m.b.t. javascript.
+// Nagekeken door Jesse Sommeling 91102801. 11/03/2020.
+
+//General variables
 var formContentContainer = document.getElementsByClassName('formInnerContentContainer')[0];
 var originalLink = "http://localhost/leerjaar%202%20(www)/block%207/challenges/front-end/Challenge-Front-End/index/body.php";
 var subjectsTitles = [];
@@ -32,11 +40,13 @@ var seats = ["VVD","PvdA","PVV","SP","CDA","D66","ChristenUnie","GroenLinks","SG
 var seated = [];
 var score = [];
 
+//Get all quation names.
 for(d = 0; subjects.length > d; d++){
 	subjectsTitles[d] = subjects[d]["title"];
 	subjectsTitlesInQuotes[d] = "\"" + subjectsTitles[d] + "\""; 
 }
 
+//Make the layout for all the quations.
 for(a = 0; subjects.length > a; a++){
 	var newDiv = document.createElement("div");
 	newDiv.className = "formContentSlideContainer";
@@ -117,6 +127,7 @@ for(a = 0; subjects.length > a; a++){
 	endScreenQuestionsWeights.appendChild(newQuestionWeightContainer);
 }
 
+//Create more pages.
 for(f = 0; subjects[0]["parties"].length > f; f++){
 	var newPartiesContainer = document.createElement("div");
 	newPartiesContainer.className = "partiesContainer";
@@ -156,24 +167,28 @@ for(f = 0; subjects[0]["parties"].length > f; f++){
 	endScreenResultsContainer.appendChild(newScoreContainer);
 }
 
+//Add some onclicks to buttons.
 introButton.setAttribute("onclick", "page("+subjectsTitlesInQuotes[0]+");");
 endButton.setAttribute("onclick", "back("+subjectsTitlesInQuotes[subjectsTitlesInQuotes.length-1]+");");
 formButton.setAttribute("onclick", "questionWeight();");
 endScreenPartiesArrow.setAttribute("onclick", "back("+questionsImportance+");");
 endScreenResultArrow.setAttribute("onclick", "parties("+partiesLink+");");
 
+//Putting the parties inputs in an array.
 var getPartiesInputs = [];
 var inputValues = [];
 for(g = 0; document.getElementsByClassName("partiesInput").length > g; g++){
 	getPartiesInputs[g] = document.getElementsByClassName("partiesInput")[g];
 }
 
+//Putting the quation weights in an array.
 var getQuestionInputs = [];
 var inputValues = [];
 for(g = 0; document.getElementsByClassName("questionWeightInput").length > g; g++){
 	getQuestionInputs[g] = document.getElementsByClassName("questionWeightInput")[g];
 }
 
+//Function to let the application now which sreen should be shown.
 function page(url = subjectsTitles[subjectsTitles.length-1]){
 	if(url == "http://localhost/leerjaar%202%20(www)/block%207/challenges/front-end/Challenge-Front-End/index/body.php" || url == "http://localhost/leerjaar%202%20(www)/block%207/challenges/front-end/Challenge-Front-End/index/body.php#intro"){
 		formContainer.style.display = "none";
@@ -259,6 +274,7 @@ function page(url = subjectsTitles[subjectsTitles.length-1]){
 	}
 }
 
+//Saves the awnsers of the person thats doing the test.
 function awnsers(question,awnser,url){
 	var choiceButtons = document.getElementsByClassName("formChoice");
 	awnsersUrl = location.href.replace('http://localhost/leerjaar%202%20(www)/block%207/challenges/front-end/Challenge-Front-End/index/body.php#','');
@@ -305,11 +321,13 @@ function awnsers(question,awnser,url){
 	page(url);
 }
 
+//This gives a command that the sceen has to go one back but this is online for the screens after all the quastions have been displayed.
 function back(url,buttonCommand = true){
 	goBack = buttonCommand;
 	page(url);
 }
 
+//This checks which quations have a higher priority
 function questionWeight(){
 	for(e = 0; subjectsTitles.length > e; e++){
 		inputValues[e] = getQuestionInputs[e].checked;
@@ -318,10 +336,12 @@ function questionWeight(){
 	parties(newUrl);
 }
 
+//This makes the parties page appear.
 function parties(url){
 	page(url);
 }
 
+//This selects the parties for each button.
 function select(type){
 	if(type == "all"){
 		for(e = 0; subjectsTitles.length > e; e++){
@@ -353,6 +373,7 @@ function select(type){
 	}
 }
 
+//This checks if the person doing the test has selected at least three parties.
 function preResult(url){
 	var amountOfPartiesSelected = 0;
 	for(k = 0; getPartiesInputs.length > k; k++){
@@ -371,6 +392,7 @@ function preResult(url){
 	}
 }
 
+//This makes the result screen, gives a command to make it apprear and caluculats the results.
 function result(url){
 	page(url);
 	var totalScore = [];
@@ -480,6 +502,8 @@ function result(url){
 	}
 }
 
+
+//This is to sort the points so it shows the one with the most points at the top.
 function sortNumber(a, b){
 	return b - a;
 }

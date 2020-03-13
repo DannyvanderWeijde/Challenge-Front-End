@@ -388,13 +388,12 @@ function preResult(url){
 	if(amountOfPartiesSelected < 3){
 		alert("u moet minimaal 3 partijen kiezen");
 	}else{
-		result(url);
+		calculateResult(url);
 	}
 }
 
-//This makes the result screen, gives a command to make it apprear and caluculats the results.
-function result(url){
-	page(url);
+//This make calculations for the result.
+function calculateResult(url){
 	var totalScore = [];
 	var partiesAndScores = [];
 	var totalAmountOfPoints = 0;
@@ -469,6 +468,12 @@ function result(url){
 		}
 		partiesAndScores[i].push(totalScore[i]);
 	}
+	result(url,totalScore,partiesAndScores,totalAmountOfPoints);
+}
+
+//This makes the result screen.
+function result(url,totalScore,partiesAndScores,totalAmountOfPoints){
+	page(url);
 	totalScore.sort(sortNumber);
 	var usedParties = [];
 	for(k = 0; totalScore.length > k; k++){
